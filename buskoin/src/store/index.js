@@ -14,7 +14,7 @@ export default new Vuex.Store({
     },
     LOGOUT(state) {
       state.token = null;
-    }  
+    },
   },
   actions: {},
   modules: {},

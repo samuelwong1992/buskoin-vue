@@ -3,10 +3,20 @@
     <div id="nav">
       <router-link to="/home">Home</router-link> |
       <router-link to="/tip">Tip</router-link> |
-      <router-link v-if="this.$store.state.token" to="/profile">Profile</router-link> <span v-if="this.$store.state.token">|</span>
-      <router-link v-if="!this.$store.state.token" to="/sign-up">Sign Up</router-link> <span v-if="!this.$store.state.token">| </span>
-      <router-link v-if="!this.$store.state.token" to="/login">Login</router-link> 
-      <router-link v-if="this.$store.state.token" to="/logout">Logout</router-link>
+      <router-link v-if="this.$store.state.token" to="/profile"
+        >Profile</router-link
+      >
+      <span v-if="this.$store.state.token">|</span>
+      <router-link v-if="!this.$store.state.token" to="/sign-up"
+        >Sign Up</router-link
+      >
+      <span v-if="!this.$store.state.token">| </span>
+      <router-link v-if="!this.$store.state.token" to="/login"
+        >Login</router-link
+      >
+      <router-link v-if="this.$store.state.token" to="/logout"
+        >Logout</router-link
+      >
     </div>
     <router-view class="rv" />
   </div>
@@ -76,7 +86,7 @@
 
 .primary-button {
   @extend .secondary-button;
-  
+
   background-color: $primary;
   border: 2px white solid;
   color: white;

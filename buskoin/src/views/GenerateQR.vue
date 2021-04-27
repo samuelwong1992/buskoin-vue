@@ -1,15 +1,20 @@
 <template>
   <div class="generate-qr">
-     <qrcode-vue v-if="entertainer_uuid" :value="entertainer_uuid" :size="300" level="H" />
+    <qrcode-vue
+      v-if="entertainer_uuid"
+      :value="entertainer_uuid"
+      :size="300"
+      level="H"
+    />
   </div>
 </template>
 
 <script>
-import QrcodeVue from 'qrcode.vue'
+import QrcodeVue from "qrcode.vue";
 
 export default {
   name: "GenerateQR",
-  data: function() {
+  data: function () {
     return {
       errorMessage: "",
 
@@ -17,38 +22,41 @@ export default {
       entertainer_name: "",
       headline: "",
       logo: "",
-    }
+    };
   },
   components: {
     QrcodeVue,
   },
   methods: {
-    getProfile: function() {
-      this.axios.get(this.$hostname + "api/profile/", {
-        headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Token " + this.$store.state.token,
-        }
-      }).then(response => {
-        if(response.data.error != null) {
-          this.errorMessage = response.data.error;
-        } else {
-          if(response.data.profile != null) {
-            this.entertainer_uuid = this.$hostname + "api/tip-user/" + response.data.profile.uuid;
-            this.entertainer_name = response.data.profile.entertainer_name;
-            this.headline = response.data.profile.headline;
-            this.logo = response.data.profile.logo;
-          }
-        }
+    getProfile: function () {
+      this.axios
+        .get(this.$hostname + "api/profile/", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Token " + this.$store.state.token,
+          },
         })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then((response) => {
+          if (response.data.error != null) {
+            this.errorMessage = response.data.error;
+          } else {
+            if (response.data.profile != null) {
+              this.entertainer_uuid =
+                this.$hostname + "api/tip-user/" + response.data.profile.uuid;
+              this.entertainer_name = response.data.profile.entertainer_name;
+              this.headline = response.data.profile.headline;
+              this.logo = response.data.profile.logo;
+            }
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => this.getProfile());
-  }
+  },
 };
 </script>
 
@@ -66,7 +74,6 @@ export default {
     margin-bottom: 0px;
     padding: 32px;
     width: 80%;
-
   }
 }
 
@@ -131,7 +138,6 @@ export default {
     &:focus {
       border: none;
     }
-    
   }
 
   .edit-button {
@@ -152,7 +158,7 @@ export default {
 
   .save-button {
     @extend .edit-button;
-    
+
     background-color: $primary;
     border: 2px white solid;
     color: white;
